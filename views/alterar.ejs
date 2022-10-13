@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo - Alterar</title>
+</head>
+<body>
+    <h3>Alterar Mercadoria</h3>
+    <form action="/admin/alterar" method="post">
+        <div>
+            <label for="floatingSelect">Artista:</label>
+            <input type="hidden" name="id" id="id" value="<%=dados._id%>">
+            <input type="hidden" name="artista" id="artista" value="<%=dados.artista%>">
+            <select name="artista" id="floatingSelect">
+                <option value="Não Específicado">Não Específicado</option>
+                <option value="Artista 1">Artista 1</option>
+                <option value="Artista 2">Artista 2</option>
+                <option value="Artista 3">Artista 3</option>
+                <option value="Artista 4">Artista 4</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="produto">Produto:</label>
+            <input type="text" id="produto" name="produto" value="<%=dados.produto%>">
+        </div>
+
+        <div>
+            <label for="quantia">Em estoque:</label>
+            <input type="number" id="quantia" name="quantia" min="0" value="<%=dados.quantia%>">
+        </div>
+
+        <div>
+            <label for="valor">Preço:</label>
+            <input type="number" id="valor" name="valor" step="0.01" min="0" value="<%=dados.valor%>">
+        </div>
+
+        <input type="submit" value="Alterar">
+        <input type="button" value="Cancelar" onclick="window.location.href = '/admin'">
+    </form>
+
+    <script>
+        var artista = document.getElementById('artista').value;
+        var quantidadeArtistas = document.querySelectorAll('option');
+        for (i = 0; i < quantidadeArtistas.length; i++) {
+            if (quantidadeArtistas[i].value == artista) {
+                quantidadeArtistas[i].selected = true;
+            }
+        }
+    </script>
+</body>
+</html>

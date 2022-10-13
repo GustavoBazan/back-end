@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo</title>
+</head>
+<body>
+    <h3>Adicionar Mercadorias</h3>
+    <form action="/admin" method="post">
+        <div>
+            <label for="floatingSelect">Artista:</label>
+            <select name="artista" id="floatingSelect">
+                <option value="Não Específicado">Não Específicado</option>
+                <option value="Artista 1">Artista 1</option>
+                <option value="Artista 2">Artista 2</option>
+                <option value="Artista 3">Artista 3</option>
+                <option value="Artista 4">Artista 4</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="produto">Produto:</label>
+            <input type="text" id="produto" name="produto" required>
+        </div>
+
+        <div>
+            <label for="quantia">Em estoque:</label>
+            <input type="number" id="quantia" name="quantia" min="0" required>
+        </div>
+
+        <div>
+            <label for="valor">Preço:</label>
+            <input type="number" id="valor" name="valor" step="0.01" min="0" required>
+        </div>
+
+        <input type="submit" value="Gravar">
+    </form>
+
+    <h3>Listar Mercadorias</h3>
+    <table>
+        <tr>
+            <th>Artista</th>
+            <th>Produto</th>
+            <th>Estocado</th>
+            <th>Preço</th>
+            <th colspan="2">Ações</th>
+        </tr>
+
+        <input type="hidden" name="id" id="dados" value="<%=dados%>">
+        <% for(var n=0;n<dados.length;n++){ %>
+            <tr>
+                <td>
+                    <%=dados[n].artista%>
+                </td>
+                <td>
+                    <%=dados[n].produto%>
+                </td>
+                <td>
+                    <%=dados[n].quantia%>
+                </td>
+                <td>
+                    <%=dados[n].valor%>
+                </td>
+                <td><a href="/admin/alterar?id=<%=dados[n]._id%>">Alterar</a></td>
+                <td><button onclick="confirmExclusion(this.value)" name="button" value="<%=dados[n]._id%>">Excluir</button></td>
+            </tr>
+            <% } %>
+    </table>
+    <script>
+        function confirmExclusion(id) {
+            if (window.confirm("Você tem certeza que deseja excluir o produto: " + "?")){
+                window.location.href = "/admin_excluir?id=" + id
+            }
+        }
+    </script>
+</body>
+</html>
