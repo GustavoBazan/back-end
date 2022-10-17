@@ -8,7 +8,7 @@
 </head>
 <body>
     <h3>Alterar Mercadoria</h3>
-    <form action="/admin/alterar" method="post">
+    <form action="/admin/alterar" method="post" enctype="multipart/form-data">
         <div>
             <label for="floatingSelect">Artista:</label>
             <input type="hidden" name="id" id="id" value="<%=dados._id%>">
@@ -37,10 +37,17 @@
             <input type="number" id="valor" name="valor" step="0.01" min="0" value="<%=dados.valor%>">
         </div>
 
+        <div>
+            <label for="imagem">Imagem:</label>
+            <img width="" height="200" border="0" align="center" src="../images/uploads/<%=dados.imagem%>" alt="Imagem"/>
+            <input type="file" name="imagem" id="imagem" accept="image/*" value="../images/uploads/<%=dados.imagem%>">
+            <input type="hidden" name="original" id="original" value="<%=dados.imagem%>">
+        </div>
+
         <input type="submit" value="Alterar">
         <input type="button" value="Cancelar" onclick="window.location.href = '/admin'">
     </form>
-
+    
     <script>
         var artista = document.getElementById('artista').value;
         var quantidadeArtistas = document.querySelectorAll('option');

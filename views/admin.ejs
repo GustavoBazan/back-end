@@ -8,7 +8,7 @@
 </head>
 <body>
     <h3>Adicionar Mercadorias</h3>
-    <form action="/admin" method="post">
+    <form action="/admin" method="post" enctype="multipart/form-data">
         <div>
             <label for="floatingSelect">Artista:</label>
             <select name="artista" id="floatingSelect">
@@ -35,6 +35,11 @@
             <input type="number" id="valor" name="valor" step="0.01" min="0" required>
         </div>
 
+        <div>
+            <label for="imagem">Imagem:</label>
+            <input type="file" name="imagem" id="imagem" accept="image/*" required>
+        </div>
+
         <input type="submit" value="Gravar">
     </form>
 
@@ -45,6 +50,7 @@
             <th>Produto</th>
             <th>Estocado</th>
             <th>Preço</th>
+            <th>Imagem</th>
             <th colspan="2">Ações</th>
         </tr>
 
@@ -63,6 +69,9 @@
                 <td>
                     <%=dados[n].valor%>
                 </td>
+                <td>
+                    <img width="" height="100" border="0" align="center" src="images/uploads/<%=dados[n].imagem%>" alt="Imagem"/>
+                </td>
                 <td><a href="/admin/alterar?id=<%=dados[n]._id%>">Alterar</a></td>
                 <td><button onclick="confirmExclusion(this.value)" name="button" value="<%=dados[n]._id%>">Excluir</button></td>
             </tr>
@@ -70,8 +79,8 @@
     </table>
     <script>
         function confirmExclusion(id) {
-            if (window.confirm("Você tem certeza que deseja excluir o produto: " + "?")){
-                window.location.href = "/admin_excluir?id=" + id
+            if (window.confirm("Você tem certeza que deseja excluir o produto?")){
+                window.location.href = "/admin/excluir?id=" + id
             }
         }
     </script>

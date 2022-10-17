@@ -6,6 +6,7 @@ const modelo = mongoose.Schema({
     produto:String,
     quantia:String,
     valor:String,
+    imagem:String,
     status:{type:Number,default:0}
 })
 
