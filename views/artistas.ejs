@@ -8,5 +8,26 @@
 </head>
 <body>
     <h1>Painel de Artistas</h1>
+    <h3>Adicionar Artistas</h3>
+    <form action="/admin/artistas" method="post">
+        <label for="nome">Nome do Artista:</label>
+        <input type="text" name="nome" id="nome">
+        <input type="submit" value="Gravar">
+    </form>
+    <h3>Artistas Afiliados</h3>
+    
+    <table>
+        <tr>
+            <th>Artistas:</th>
+            <th>Ações:</th>
+        </tr>
+        <% for(var n = 0; n < dados.length; n++){ %>
+        <tr>
+            <td><%=dados[n].artista%></td>
+            <td><a href="/admin/artistas/excluir?id=<%=dados[n]._id%>">Excluir</a></td>
+        </tr>
+        <% } %>
+    </table>
+    
 </body>
 </html>

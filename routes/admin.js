@@ -12,18 +12,12 @@ module.exports = (app)=>{
     var artistas = require('../models/artistas')
 
     //rota admin
-    app.get('/admin',(req,res)=>{
+    app.get('/admin',async(req,res)=>{
         //conecta com o database
         conexao()
 
-        //busca todos os documentos no banco de dados
-        mercadorias.find().sort({_id:-1})
-        .then((mercadorias)=>{
-            res.render('admin.ejs',{dados:mercadorias})
-        })
-        .catch(()=>{
-            res.render('admin.ejs')
-        })
+        //renderiza a página levando informações das collections mercadorias e artistas
+        res.render('admin.ejs', {dados: await mercadorias.find().sort({_id:-1}), artistas_dados: await artistas.find()})
     })
 
         //importar as configurações do upload
@@ -126,10 +120,26 @@ module.exports = (app)=>{
         //busca todos os documentos no banco de dados
         artistas.find().sort({_id:-1})
         .then((artistas)=>{
-            res.render('artistas.ejs',{dados:mercadorias})
+            res.render('artistas.ejs',{dados:artistas})
         })
         .catch(()=>{
             res.render('admin.ejs')
         })
+    })
+
+    app.post('/admin/artistas',async(req,res)=>{
+        var arquivo = await new artistas({
+            artista:req.body.nome
+        }).save()
+        res.redirect('/admin/artistas')
+    })
+
+    app.get('/admin/artistas/excluir',async(req,res)=>{
+        // recupera o id na barra de endereços
+        var id = req.query.id;
+        //excluindo o documento da coleção
+        var excluir = await artistas.findOneAndRemove({_id:id})
+        //voltar para a página mygrid
+        res.redirect('/admin/artistas')
     })
 }

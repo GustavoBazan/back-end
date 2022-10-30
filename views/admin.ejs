@@ -13,10 +13,9 @@
             <label for="floatingSelect">Artista:</label>
             <select name="artista" id="floatingSelect">
                 <option value="Não Específicado">Não Específicado</option>
-                <option value="Artista 1">Artista 1</option>
-                <option value="Artista 2">Artista 2</option>
-                <option value="Artista 3">Artista 3</option>
-                <option value="Artista 4">Artista 4</option>
+                <% for(var i=0;i<artistas_dados.length; i++){%>
+                <option value="<%=artistas_dados[i].artista%>"><%=artistas_dados[i].artista%></option>
+                <% } %>
             </select>
         </div>
 
@@ -54,7 +53,7 @@
             <th colspan="2">Ações</th>
         </tr>
 
-        <input type="hidden" name="id" id="dados" value="<%=dados%>">
+        <input type="hidden" name="id" id="dados" value="<%=dados.id%>">
         <% for(var n=0;n<dados.length;n++){ %>
             <tr>
                 <td>
