@@ -89,7 +89,7 @@ module.exports = (app)=>{
                 //conectar com o databaase
                 conexao()
 
-                if (req.file.filename == undefined) {
+                if (req.file == undefined) {
                     updatedImage = req.body.original
                 } else {
                     updatedImage = req.file.filename

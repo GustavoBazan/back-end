@@ -1,87 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel Administrativo</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    <h3>Adicionar Mercadorias</h3>
-    <form action="/admin" method="post" enctype="multipart/form-data">
-        <div>
-            <label for="floatingSelect">Artista:</label>
-            <select name="artista" id="floatingSelect">
-                <option value="Não Específicado">Não Específicado</option>
-                <% for(var i=0;i<artistas_dados.length; i++){%>
-                <option value="<%=artistas_dados[i].artista%>"><%=artistas_dados[i].artista%></option>
-                <% } %>
-            </select>
-        </div>
+    <div class="adicionar">
 
-        <div>
-            <label for="produto">Produto:</label>
-            <input type="text" id="produto" name="produto" required>
-        </div>
+        <h3>Adicionar Mercadorias</h3>
+        <form action="/admin" method="post" enctype="multipart/form-data">
+            <div>
+                <label for="floatingSelect">Artista:</label>
+                <select name="artista" id="floatingSelect">
+                    <option value="Não Específicado">Não Específicado</option>
+                    <% for(var i=0;i<artistas_dados.length; i++){%>
+                        <option value="<%=artistas_dados[i].artista%>">
+                            <%=artistas_dados[i].artista%>
+                        </option>
+                        <% } %>
+                </select>
+            </div>
 
-        <div>
-            <label for="quantia">Em estoque:</label>
-            <input type="number" id="quantia" name="quantia" min="0" required>
-        </div>
+            <div>
+                <label for="produto">Produto:</label>
+                <input type="text" id="produto" name="produto" required>
+            </div>
 
-        <div>
-            <label for="valor">Preço:</label>
-            <input type="number" id="valor" name="valor" step="0.01" min="0" required>
-        </div>
+            <div>
+                <label for="quantia">Em estoque:</label>
+                <input type="number" id="quantia" name="quantia" min="0" required>
+            </div>
 
-        <div>
-            <label for="imagem">Imagem:</label>
-            <input type="file" name="imagem" id="imagem" accept="image/*" required>
-        </div>
+            <div>
+                <label for="valor">Preço:</label>
+                <input type="number" id="valor" name="valor" step="0.01" min="0" required>
+            </div>
 
-        <input type="submit" value="Gravar">
-    </form>
+            <div>
+                <label for="imagem">Imagem:</label>
+                <input type="file" name="imagem" id="imagem" accept="image/*" required>
+            </div>
 
-    <h3>Listar Mercadorias</h3>
-    <table>
-        <tr>
-            <th>Artista</th>
-            <th>Produto</th>
-            <th>Estocado</th>
-            <th>Preço</th>
-            <th>Imagem</th>
-            <th colspan="2">Ações</th>
-        </tr>
+            <button type="submit" class="button-28" role="button">Gravar</button>
+        </form>
 
-        <input type="hidden" name="id" id="dados" value="<%=dados.id%>">
-        <% for(var n=0;n<dados.length;n++){ %>
+    </div>
+
+    <div class="listar">
+        <h3>Listar Mercadorias</h3>
+        <table>
             <tr>
-                <td>
-                    <%=dados[n].artista%>
-                </td>
-                <td>
-                    <%=dados[n].produto%>
-                </td>
-                <td>
-                    <%=dados[n].quantia%>
-                </td>
-                <td>
-                    <%=dados[n].valor%>
-                </td>
-                <td>
-                    <img width="" height="100" border="0" align="center" src="images/uploads/<%=dados[n].imagem%>" alt="Imagem"/>
-                </td>
-                <td><a href="/admin/alterar?id=<%=dados[n]._id%>">Alterar</a></td>
-                <td><button onclick="confirmExclusion(this.value)" name="button" value="<%=dados[n]._id%>">Excluir</button></td>
+                <th>Artista</th>
+                <th>Produto</th>
+                <th>Estocado</th>
+                <th>Preço</th>
+                <th>Imagem</th>
+                <th colspan="2">Ações</th>
             </tr>
-            <% } %>
-    </table>
+
+            <input type="hidden" name="id" id="dados" value="<%=dados.id%>">
+            <% for(var n=0;n<dados.length;n++){ %>
+                <tr>
+                    <td>
+                        <%=dados[n].artista%>
+                    </td>
+                    <td>
+                        <%=dados[n].produto%>
+                    </td>
+                    <td>
+                        <%=dados[n].quantia%>
+                    </td>
+                    <td>
+                        <%=dados[n].valor%>
+                    </td>
+                    <td>
+                        <img width="" height="100" border="0" align="center" src="images/uploads/<%=dados[n].imagem%>"
+                            alt="Imagem" />
+                    </td>
+                    <td><a href="/admin/alterar?id=<%=dados[n]._id%>">Alterar</a></td>
+                    <td><button onclick="confirmExclusion(this.value)" name="button"
+                            value="<%=dados[n]._id%>">Excluir</button></td>
+                </tr>
+                <% } %>
+        </table>
+    </div>
+
+
     <script>
         function confirmExclusion(id) {
-            if (window.confirm("Você tem certeza que deseja excluir o produto?")){
+            if (window.confirm("Você tem certeza que deseja excluir o produto?")) {
                 window.location.href = "/admin/excluir?id=" + id
             }
         }
     </script>
 </body>
+
 </html>

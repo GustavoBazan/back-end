@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel Administrativo - Alterar</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <h3>Alterar Mercadoria</h3>
@@ -44,8 +45,8 @@
             <input type="hidden" name="original" id="original" value="<%=dados.imagem%>">
         </div>
 
-        <input type="submit" value="Alterar">
-        <input type="button" value="Cancelar" onclick="window.location.href = '/admin'">
+        <button type="submit">Alterar</button>
+        <button type="submit" onclick="window.location.href = '/admin'">Cancelar</button>
     </form>
     
     <script>
